@@ -2,29 +2,30 @@ import UIKit
 
 //problem 1
 for i in 1...100{
-    if i%15==0 { print("FizzBuzz")}
-    else if i%3==0 { print("Fizz")}
-    else if i%5==0 { print("Buzz")}
+    if i%15==0 { print("FizzBuzz")}//if divisible by both 3 and 5
+    else if i%3==0 { print("Fizz")}//if divisible only by 3
+    else if i%5==0 { print("Buzz")}//if divisible only by 5
     else { print(i)}
 }
 
 //problem 2
 func isPrime(_ number: Int)-> Bool{
-    if number==1{
+    if number==1{// 1 is not prime
         return false
     }
-    for i in 2..<number{
+    for i in 2..<number{//check if it is divisible by any number
         if (number%i)==0{
             return false
         }
     }
     return true
 }
-for i in 1...100{
+for i in 1...100{//run from 1 to 100
     if isPrime(i){print(i)}
 }
 
 //problem 3
+//function to convert from one unit to another
 func fahrenheitToCelsius(_ fahrenheit: Double) -> Double {
     return (fahrenheit - 32) * 5/9}
 func fahrenheitToKelvin(_ fahrenheit: Double) -> Double {
@@ -37,10 +38,10 @@ func kelvinToFahrenheit(_ kelvin: Double) -> Double {
     return (kelvin - 273.15) * 9/5 + 32}
 func kelvinToCelsius(_ kelvin: Double) -> Double {
     return kelvin - 273.15}
-
+//hardcode input
 let temperatureValue: Double = 100
 let temperatureUnit: Character = "C"
-
+//determine which function to use
 switch temperatureUnit {
 case "C":
     print("\(temperatureValue)°C is equal to \(celsiusToFahrenheit(temperatureValue))°F and \(celsiusToKelvin(temperatureValue))°K")
@@ -53,10 +54,10 @@ default:
 }
 
 //problem 4
-func addItem(to list: inout [String], item:String){
+func addItem(to list: inout [String], item:String){//to add item to list
     return list.append(item)
 }
-func removeItem(from list: inout [String], item:String){
+func removeItem(from list: inout [String], item:String){//to remove item from list by finding index
     if let index = list.firstIndex(of: item){
         list.remove(at: index)
     }
@@ -64,7 +65,7 @@ func removeItem(from list: inout [String], item:String){
         print("item not found")
     }
 }
-func showList(list:[String]){
+func showList(list:[String]){//printing out the list
     if list.isEmpty{
         print("list empty")
     }
@@ -76,7 +77,7 @@ func showList(list:[String]){
 }
 
 var ShoppingList: [String] = []
-
+//test shopping list
 showList(list: ShoppingList)
 addItem(to: &ShoppingList, item: "Tomato")
 addItem(to: &ShoppingList, item: "Potato")
@@ -90,7 +91,7 @@ removeItem(from: &ShoppingList, item: "Banana")
 //problem 5
 var dict: [String: Int] = [:]
 var text = "Tomato, tomato\\ TOMATO: potato/ Potato; POTATO onion onnnion carrot caRRot"
-var chars = Array(text)
+var chars = Array(text)//convert text to array of characters and remove punctuations
 let punctiation: Set<Character> = [",",".","\\","/",":",";"]
 for i in 0..<chars.count{
     if punctiation.contains(chars[i]){
@@ -98,8 +99,8 @@ for i in 0..<chars.count{
     }
 }
 text=String(chars)
-let words = text.lowercased().split(separator: " ").map{String($0)}
-for word in words{
+let words = text.lowercased().split(separator: " ").map{String($0)}//split text to words
+for word in words{//counting frequencies by dictionary
     if dict[word] != nil{
         dict[word]!+=1
     }
@@ -114,11 +115,11 @@ for (word, count) in dict{
 //problem 6
 func fibonacci(_ n:Int)->[Int]{
     var sequence: [Int] = [1,1]
-    if n<1{
+    if n<1{//return empty list if number is equal or less than zero
         return []
     }
     else{
-        for i in 2..<n{
+        for i in 2..<n{//generate fibonacci sequence
             sequence.append(sequence[i-1]+sequence[i-2])
         }
     }
@@ -133,7 +134,7 @@ let scores=[90,85,92,88,95,93]
 var highestScore=scores[0]
 var lowestScore=scores[0]
 var sumOfScores=0
-for i in 0..<scores.count{
+for i in 0..<scores.count{//track highest, lowest, average score
     sumOfScores+=scores[i]
     if scores[i]>highestScore{
         highestScore=scores[i]
@@ -144,7 +145,7 @@ for i in 0..<scores.count{
 }
 var averageScore=Double(sumOfScores)/Double(scores.count)
 print("highest = \(highestScore), lowest = \(lowestScore), average = \(averageScore)")
-for i in 0..<names.count{
+for i in 0..<names.count{//display each student, score and indication about average
     if Double(scores[i])<averageScore{
         print(names[i],":",scores[i]," - below average")
     }
@@ -155,8 +156,8 @@ for i in 0..<names.count{
 
 //problem 8
 func isPalindrome(_ text:String)->Bool{
-    let text = text.lowercased().filter {$0.isLetter||$0.isNumber}
-    if text == String(text.reversed()){
+    let text = text.lowercased().filter {$0.isLetter||$0.isNumber}//filter only letters and digits
+    if text == String(text.reversed()){//compare to its reverse if palindrome
         return true
     }
     else{
@@ -169,6 +170,7 @@ print(isPalindrome("1234"))
 print(isPalindrome("Abba"))
 
 //problem 9
+//functions for operations
 func addition(_ a: Double, _ b: Double)->Double{
     return a + b}
 func subtraction(_ a: Double, _ b: Double)->Double{
@@ -176,20 +178,20 @@ func subtraction(_ a: Double, _ b: Double)->Double{
 func multiplication(_ a: Double, _ b: Double)->Double{
     return a * b}
 func division(_ a: Double, _ b: Double)->Double?{
-    if b==0{
+    if b==0{//prevent division by 0
         return nil
     }
     else {
         return a / b
     }
 }
-let operations:[(Double,String,Double)]=[
+let operations:[(Double,String,Double)]=[//operation examples
     (10, "+", 20),
     (30, "-", 15),
     (40, "*", 2),
     (50, "/", 5),
     (60, "/", 0)]
-
+//performing operations by switch-case
 for (a,op,b) in operations{
     switch op {
     case "+":
@@ -214,9 +216,9 @@ for (a,op,b) in operations{
 func hasUniqueCharacters(_ text:String)->Bool{
     var set:Set<Character>=[]
     for i in text{
-        set.insert(i)
+        set.insert(i)//insert unique character from text to set
     }
-    return text.count==set.count
+    return text.count==set.count//text has unique characters if their length match
 }
 let uniqueText="helLo"
 print(hasUniqueCharacters(uniqueText))
