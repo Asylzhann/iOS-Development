@@ -29,7 +29,6 @@ class SlotsViewController: UIViewController {
     
     var stoppedCount = 0
     
-    var balance = 10000
     var bet = 100
     let minBet = 100
     
@@ -54,6 +53,11 @@ class SlotsViewController: UIViewController {
         pickerView.selectRow(1, inComponent: 2, animated: false)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateBalanceLabel()
+    }
+    
     @IBAction func spinButtonTapped(_ sender: Any) {
         view.endEditing(true)
         
@@ -63,7 +67,7 @@ class SlotsViewController: UIViewController {
         resultLabel.text = ""
         stoppedCount = 0
         
-        balance -= bet
+        BalanceManager.shared.balance -= bet
         updateBalanceLabel()
         
         for _ in 0..<rollDistance[0] { component1.append(Int.random(in: 0..<slots.count)) }
@@ -90,7 +94,7 @@ class SlotsViewController: UIViewController {
             
             if stoppedCount == 3 {
                 evaluateResult()
-                spinButton.isEnabled = balance >= minBet
+                spinButton.isEnabled = BalanceManager.shared.balance >= minBet
             }
         }
     }
@@ -112,12 +116,12 @@ class SlotsViewController: UIViewController {
             resultLabel.text = "you lose("
         }
         
-        balance += winAmount
+        BalanceManager.shared.balance += winAmount
         updateBalanceLabel()
     }
 
     func readBet() -> Bool {
-        guard let text = betAmountTextbox.text, let value = Int(text), value >= minBet, value <= balance
+        guard let text = betAmountTextbox.text, let value = Int(text), value >= minBet, value <= BalanceManager.shared.balance
         else {
             resultLabel.text = "Invalid bet"
             return false
@@ -128,7 +132,7 @@ class SlotsViewController: UIViewController {
     
     @IBAction func plus100ButtonTapped(_ sender: Any) {
         let current = Int(betAmountTextbox.text ?? "") ?? bet
-        let newBet = min(current + 100, balance)
+        let newBet = min(current + 100, BalanceManager.shared.balance)
         betAmountTextbox.text = "\(newBet)"
     }
     
@@ -139,11 +143,12 @@ class SlotsViewController: UIViewController {
     }
     
     @IBAction func allInButtonTapped(_ sender: Any) {
-        betAmountTextbox.text = "\(balance)"
+        betAmountTextbox.text = "\(BalanceManager.shared.balance)"
     }
     
     func updateBalanceLabel() {
-        balanceLabel.text = "Balance: \(balance)"
+        balanceLabel.text = "Balance: \(BalanceManager.shared.balance)"
+        spinButton.isEnabled = BalanceManager.shared.balance >= minBet
     }
 }
 
