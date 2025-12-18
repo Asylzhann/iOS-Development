@@ -128,6 +128,8 @@ class RouletteViewController: UIViewController {
         }
         
         if didWin {
+            SoundManager.shared.playWinSound()
+            
             let winAmount = Int(Double(bet) * multiplier * CardManager.shared.getWinMultiplier())
             BalanceManager.shared.balance += winAmount
             resultLabel.text = "\(result) — won) +\(winAmount)"

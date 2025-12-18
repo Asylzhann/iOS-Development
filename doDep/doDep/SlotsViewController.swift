@@ -123,6 +123,8 @@ class SlotsViewController: UIViewController {
         }
         
         if isWinBy2 || isWinBy3 {
+            SoundManager.shared.playWinSound()
+            
             if bet >= 1000 {
                 if let _ = CardManager.shared.rollCard() {
                     let alert = UIAlertController(title: "congrats!", message: "you won a card", preferredStyle: .alert)
