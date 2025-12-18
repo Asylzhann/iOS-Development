@@ -36,6 +36,9 @@ class RouletteViewController: UIViewController {
         betAmountTextbox.text = "\(bet)"
         updateBalanceLabel()
         updateButtonSelection(selectedTag: 0)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateBalanceLabel), name: NSNotification.Name("BalanceChanged"), object: nil)
+        updateBalanceLabel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -125,16 +128,24 @@ class RouletteViewController: UIViewController {
         }
         
         if didWin {
-            let winAmount = Int(Double(bet) * multiplier)
+            let winAmount = Int(Double(bet) * multiplier * CardManager.shared.getWinMultiplier())
             BalanceManager.shared.balance += winAmount
-            resultLabel.text = "\(result) — won! +\(winAmount)"
+            resultLabel.text = "\(result) — won) +\(winAmount)"
+            
+            if bet >= 1000 {
+                if let _ = CardManager.shared.rollCard() {
+                    let alert = UIAlertController(title: "congrats!", message: "you won a card", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "ok", style: .default))
+                    present(alert, animated: true)
+                }
+            }
         } else {
             resultLabel.text = "\(result) — lost("
         }
         updateBalanceLabel()
     }
     
-    func updateBalanceLabel() {
+    @objc func updateBalanceLabel() {
         balanceLabel.text = "Balance: \(BalanceManager.shared.balance)"
         spinButton.isEnabled = BalanceManager.shared.balance >= minBet
     }

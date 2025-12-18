@@ -51,6 +51,9 @@ class SlotsViewController: UIViewController {
         pickerView.selectRow(1, inComponent: 0, animated: false)
         pickerView.selectRow(1, inComponent: 1, animated: false)
         pickerView.selectRow(1, inComponent: 2, animated: false)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateBalanceLabel), name: NSNotification.Name("BalanceChanged"), object: nil)
+        updateBalanceLabel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -104,19 +107,39 @@ class SlotsViewController: UIViewController {
         let b = component2[currentRows[1]]
         let c = component3[currentRows[2]]
         
-        var winAmount = 0
+        let isWinBy3 = (a == b && b == c)
+        let isWinBy2 = (a == b || b == c || a == c)
         
-        if a == b && b == c {
-            winAmount = bet * 3
-            resultLabel.text = "jackpot! +\(winAmount)"
-        } else if a == b || b == c || a == c {
-            winAmount = Int(Double(bet) * 1.5)
-            resultLabel.text = "you win) +\(winAmount)"
+        var baseWin: Double = 0
+        
+        if isWinBy3 {
+            baseWin = Double(bet) * 4.0
+            resultLabel.text = "jackpot!"
+        } else if isWinBy2 {
+            baseWin = Double(bet) * 2.0
+            resultLabel.text = "you win)"
         } else {
             resultLabel.text = "you lose("
         }
         
-        BalanceManager.shared.balance += winAmount
+        if isWinBy2 || isWinBy3 {
+            if bet >= 1000 {
+                if let _ = CardManager.shared.rollCard() {
+                    let alert = UIAlertController(title: "congrats!", message: "you won a card", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "ok", style: .default))
+                    self.present(alert, animated: true)
+                }
+            }
+        }
+        
+        if baseWin > 0 {
+            let cardBonusMultiplier = CardManager.shared.getWinMultiplier()
+            let finalWin = Int(baseWin * cardBonusMultiplier)
+            
+            BalanceManager.shared.balance += finalWin
+            resultLabel.text! += " +\(finalWin)"
+        }
+        
         updateBalanceLabel()
     }
 
@@ -146,7 +169,7 @@ class SlotsViewController: UIViewController {
         betAmountTextbox.text = "\(BalanceManager.shared.balance)"
     }
     
-    func updateBalanceLabel() {
+    @objc func updateBalanceLabel() {
         balanceLabel.text = "Balance: \(BalanceManager.shared.balance)"
         spinButton.isEnabled = BalanceManager.shared.balance >= minBet
     }

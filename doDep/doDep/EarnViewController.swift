@@ -15,6 +15,7 @@ class EarnViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(updateBalanceLabel), name: NSNotification.Name("BalanceChanged"), object: nil)
         updateBalanceLabel()
     }
     
@@ -73,9 +74,11 @@ class EarnViewController: UIViewController {
     }
     
     @objc func circleTapped(_ sender: UIButton) {
-        let rewardAmount = sender.tag
+        let baseReward = sender.tag
+        let cardBonus = CardManager.shared.getTapBonus()
+        let totalReward = baseReward + cardBonus
         
-        BalanceManager.shared.balance += rewardAmount
+        BalanceManager.shared.balance += totalReward
         updateBalanceLabel()
         
         UIView.animate(withDuration: 0.1, animations: {
@@ -96,7 +99,7 @@ class EarnViewController: UIViewController {
         }
     }
     
-    func updateBalanceLabel() {
+    @objc func updateBalanceLabel() {
         balanceLabel.text = "Balance: \(BalanceManager.shared.balance)"
     }
 }

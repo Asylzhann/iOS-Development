@@ -312,6 +312,7 @@
                         <segue destination="CHh-Gb-gIz" kind="relationship" relationship="viewControllers" id="zgs-RA-Lcs"/>
                         <segue destination="vVG-IS-hnt" kind="relationship" relationship="viewControllers" id="lAY-dW-1Tt"/>
                         <segue destination="lfx-al-cdV" kind="relationship" relationship="viewControllers" id="9oB-eC-nc0"/>
+                        <segue destination="Hlr-LP-0dJ" kind="relationship" relationship="viewControllers" id="hfj-gQ-CoC"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Ai-GR-jDR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -322,7 +323,7 @@
         <scene sceneID="0MA-aI-g9g">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CHh-Gb-gIz" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Slots" image="diamond" catalog="system" id="Wb9-WV-GKM" userLabel="Item"/>
+                    <tabBarItem key="tabBarItem" title="Slots" image="triangle" catalog="system" id="Wb9-WV-GKM" userLabel="Item"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Yk3-uQ-RrY">
                         <rect key="frame" x="0.0" y="124" width="402" height="54"/>
@@ -341,7 +342,7 @@
         <scene sceneID="POj-IJ-LPq">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vVG-IS-hnt" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Roulette" image="circle" catalog="system" id="5r7-Fe-ckm" userLabel="Item"/>
+                    <tabBarItem key="tabBarItem" title="Roulette" image="diamond" catalog="system" id="5r7-Fe-ckm" userLabel="Item"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="JRX-r8-8sw">
                         <rect key="frame" x="0.0" y="124" width="402" height="54"/>
@@ -388,7 +389,7 @@
         <scene sceneID="q2x-Bi-NHS">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lfx-al-cdV" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Earn" image="square" catalog="system" id="PNe-DC-CQS"/>
+                    <tabBarItem key="tabBarItem" title="Earn" image="circle" catalog="system" id="PNe-DC-CQS"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="UQL-vI-Yuc">
                         <rect key="frame" x="0.0" y="124" width="402" height="54"/>
@@ -403,6 +404,92 @@
             </objects>
             <point key="canvasLocation" x="1492.5373134328358" y="955.60640732265438"/>
         </scene>
+        <!--Card List View Controller-->
+        <scene sceneID="9YO-ud-CBe">
+            <objects>
+                <viewController id="qD7-Ag-k9u" customClass="CardListViewController" customModule="doDep" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="U9x-V5-Ida">
+                        <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="9vl-Eh-jr0">
+                                <rect key="frame" x="0.0" y="178" width="402" height="579"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HeroCell" rowHeight="200" id="UFZ-Gv-eV1" customClass="CardTableViewCell" customModule="doDep" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="402" height="200"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UFZ-Gv-eV1" id="jra-MT-tEH">
+                                            <rect key="frame" x="0.0" y="0.0" width="402" height="200"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RUE-LD-M2U">
+                                                    <rect key="frame" x="20" y="20" width="160" height="160"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lCM-gt-X0P">
+                                                    <rect key="frame" x="188" y="20" width="194" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kC6-zE-dnG">
+                                                    <rect key="frame" x="188" y="58" width="194" height="122"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                    <color key="textColor" systemColor="labelColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="descriptionTextView" destination="kC6-zE-dnG" id="DF9-5S-3PL"/>
+                                            <outlet property="heroImageView" destination="RUE-LD-M2U" id="CBD-u2-4Dd"/>
+                                            <outlet property="nameLabel" destination="lCM-gt-X0P" id="alc-p5-lVo"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="5pV-Vh-gcN"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="9vl-Eh-jr0" firstAttribute="top" secondItem="5pV-Vh-gcN" secondAttribute="top" id="I0F-xV-TZ4"/>
+                            <constraint firstItem="9vl-Eh-jr0" firstAttribute="leading" secondItem="5pV-Vh-gcN" secondAttribute="leading" id="X0E-CD-atR"/>
+                            <constraint firstItem="5pV-Vh-gcN" firstAttribute="bottom" secondItem="9vl-Eh-jr0" secondAttribute="bottom" id="d8Z-wa-yvh"/>
+                            <constraint firstItem="5pV-Vh-gcN" firstAttribute="trailing" secondItem="9vl-Eh-jr0" secondAttribute="trailing" id="py1-I9-Hje"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Asp-4d-FAA"/>
+                    <connections>
+                        <outlet property="tableView" destination="9vl-Eh-jr0" id="7HM-Lo-RqN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GgD-oa-47D" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2235.8208955223881" y="1657.8947368421052"/>
+        </scene>
+        <!--Cards-->
+        <scene sceneID="Mmx-Eb-Mxh">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Hlr-LP-0dJ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Cards" image="square" catalog="system" id="DfK-HB-Lid"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5vZ-eL-vsi">
+                        <rect key="frame" x="0.0" y="124" width="402" height="54"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="qD7-Ag-k9u" kind="relationship" relationship="rootViewController" id="1aJ-eu-u6P"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BZT-MZ-EHh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2235.8208955223881" y="955.60640732265438"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Image 2" width="120" height="120"/>
@@ -410,6 +497,7 @@
         <image name="circle" catalog="system" width="128" height="123"/>
         <image name="diamond" catalog="system" width="128" height="124"/>
         <image name="square" catalog="system" width="128" height="114"/>
+        <image name="triangle" catalog="system" width="128" height="109"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
